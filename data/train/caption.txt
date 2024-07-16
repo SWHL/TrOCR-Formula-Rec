@@ -1,0 +1,6 @@
+18_em_0	x _ { k } x x _ { k } + y _ { k } y x _ { k }
+18_em_10	2 6
+18_em_11	q _ { t } = 2 q
+18_em_12	\frac { p e ^ { t } } { 1 - ( 1 - p ) e ^ { t } }
+18_em_13	4 ^ { 2 } + 4 ^ { 2 } + \frac { 4 } { 4 }
+18_em_14	\frac { d y } { d x } = \frac { 1 } { \frac { d x } { d y } }

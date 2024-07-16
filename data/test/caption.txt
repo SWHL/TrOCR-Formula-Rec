@@ -1,0 +1,5 @@
+18_em_15	k = 1 0 0 0 0 0 0 0 0 0
+18_em_16	m \geq 2
+18_em_17	u ( t ) = \frac { u ( 0 ) } { 1 - t u ( 0 ) }
+18_em_18	\theta _ { 3 } = \theta _ { 1 } + \theta _ { 2 }
+18_em_19	y \neq x
