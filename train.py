@@ -42,9 +42,6 @@ class IAMDataset(Dataset):
         self.processor = processor
         self.max_target_length = max_target_length
 
-    def __len__(self):
-        return len(self.df)
-
     def __getitem__(self, idx):
         # get file name + text
         file_name = self.df["file_name"][idx]
@@ -67,6 +64,9 @@ class IAMDataset(Dataset):
             "labels": torch.tensor(labels),
         }
         return encoding
+
+    def __len__(self):
+        return len(self.df)
 
 
 processor = TrOCRProcessor.from_pretrained("microsoft/trocr-base-handwritten")
@@ -114,12 +114,13 @@ training_args = Seq2SeqTrainingArguments(
     logging_steps=2,
     save_steps=1,
     eval_steps=500,
+    report_to=["tensorboard"],
     num_train_epochs=100,
 )
 
 trainer = Seq2SeqTrainer(
     model=model,
-    tokenizer=processor.feature_extractor,
+    tokenizer=processor.image_processor,
     args=training_args,
     # compute_metrics=compute_metrics,
     train_dataset=train_dataset,
