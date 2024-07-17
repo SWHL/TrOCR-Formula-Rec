@@ -16,6 +16,10 @@ data
     └── formulaire039-equation074.jpg
 ```
 
+## Dataset
+
+- [UniMER_Dataset](https://huggingface.co/datasets/wanderkid/UniMER_Dataset)
+
 ## Reference
 
 - [TrOCR-Handwritten-Mathematical-Expression-Recognition](https://github.com/win5923/TrOCR-Handwritten-Mathematical-Expression-Recognition.git)
