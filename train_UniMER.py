@@ -30,9 +30,6 @@ class IAMDataset(Dataset):
         self.processor = processor
         self.max_target_length = max_target_length
 
-    def __len__(self):
-        return len(self.data)
-
     def __getitem__(self, idx):
         file_name, text = self.data[idx]
         image = Image.open(file_name).convert("RGB")
@@ -56,17 +53,20 @@ class IAMDataset(Dataset):
         }
         return encoding
 
+    def __len__(self):
+        return len(self.data)
 
-def get_dataset(train_img_dir, train_txt_path):
-    train_data_info = read_txt(train_txt_path)
-    train_data = []
-    for i, data in enumerate(tqdm(train_data_info)):
-        img_path = train_img_dir / f"{i:07d}.png"
+
+def get_dataset(img_dir, txt_path):
+    data_info = read_txt(txt_path)
+    need_data = []
+    for i, one_data in enumerate(tqdm(data_info)):
+        img_path = img_dir / f"{i:07d}.png"
         if img_path.exists():
-            train_data.append([str(img_path), data])
+            need_data.append([str(img_path), one_data])
 
-    random.shuffle(train_data)
-    return train_data
+    random.shuffle(need_data)
+    return need_data
 
 
 if __name__ == "__main__":
@@ -81,8 +81,8 @@ if __name__ == "__main__":
     test_data = get_dataset(test_img_dir, test_txt_path)
 
     max_target_length = 512
-
-    processor = TrOCRProcessor.from_pretrained("microsoft/trocr-base-handwritten")
+    model_name = "microsoft/trocr-small-stage1"
+    processor = TrOCRProcessor.from_pretrained(model_name)
     train_dataset = IAMDataset(
         data=train_data, processor=processor, max_target_length=max_target_length
     )
@@ -105,7 +105,7 @@ if __name__ == "__main__":
     label_str = processor.decode(labels, skip_special_tokens=True)
     print(label_str)
 
-    model = VisionEncoderDecoderModel.from_pretrained("microsoft/trocr-small-stage1")
+    model = VisionEncoderDecoderModel.from_pretrained(model_name)
 
     model.config.decoder_start_token_id = processor.tokenizer.cls_token_id
     model.config.pad_token_id = processor.tokenizer.pad_token_id
@@ -133,6 +133,7 @@ if __name__ == "__main__":
         report_to=["tensorboard"],
         num_train_epochs=100,
         remove_unused_columns=False,
+        dataloader_num_workers=4,
     )
 
     trainer = Seq2SeqTrainer(
