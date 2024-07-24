@@ -1,0 +1,20 @@
+\mathrm { C H _ { 4 } }
+F _ { i } [ z ] ( x , y ) = f _ { i } ( x , y , z ) \ i = 1 , \ldots , n ,
+( \mathtt { M a c h ~ n u m b e r } = 1 )
+\gamma
+( 9 )
+\sigma
+( \mathrm { P } < 0 . 0 0 0 1 ,
+O ( R ^ { - 1 / 4 } )
+\mathrm { V O _ { 2 } m a x }
+4 0 0 \mathrm { m g } .
+e _ { j } ( q )
+
+\begin{array} { r } { v _ { t } + \widetilde { P } ^ { - 1 } \widetilde { Q } F = - \widetilde { P } ^ { - 1 } D _ { 1 } ^ { T } \widetilde { B } _ { M } D _ { 1 } v } \end{array}
+p =
+\mathrm { N O } _ { 3 } ^ { \ - } \mathrm { - N }
+\phi
+2 0 0 \, \mathrm { m m }
+T _ { 0 1 } ^ { \lambda }
+P \mathrm { - v a l u e s } .
+\mathrm { B }

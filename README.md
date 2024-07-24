@@ -2,29 +2,16 @@
 
 基于TrOCR + UniMER-1M数据集，训练一个小而美的公式识别数据集。
 
+仓库dataset目录下为UniMER-1M的Tiny版，只用来测试程序使用。
+
 ## 注意事项
 
 使用transformers训练前，需要在`import torch`前，指定`CUDA_VISIBLE_DEVICES`，否则会卡住。
 
-## data.zip
-
-```bash
-data
-├── 2014
-│   ├── formulaire039-equation072.jpg
-│   ├── caption.txt
-│   ├── formulaire039-equation073.jpg
-│   └── formulaire039-equation074.jpg
-└── train
-    ├── formulaire039-equation072.jpg
-    ├── caption.txt
-    ├── formulaire039-equation073.jpg
-    └── formulaire039-equation074.jpg
-```
-
 ## Dataset
 
 [UniMER_Dataset](https://huggingface.co/datasets/wanderkid/UniMER_Dataset)
+完整的UniMER目录结构如下：
 
 ```text
 dataset
