@@ -4,3 +4,8 @@ transformers==4.42.4
 sentencepiece
 datasets
 jiwer
+tabulate
+evaluate
+Pillow
+numpy
+tqdm
