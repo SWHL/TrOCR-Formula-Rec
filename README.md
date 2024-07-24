@@ -48,6 +48,21 @@ dataset
     └── spe.txt
 ```
 
+训练集总共1061,791 LaTeX-Image pairs。
+
+测试集由4种类型公式组成，总共23757张图像：
+
+- Simple Printed Expressions (SPE): 6,762 samples
+- Complex Printed Expressions (CPE): 5,921 samples
+- Screen Capture Expressions (SCE): 4,742 samples
+- Handwritten Expressions (HWE): 6,332 samples
+
+各个种类示例图像如下：
+
+<div align="center">
+    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/69186975/327987046-7301df68-e14c-4607-81bc-b6ee3ba1780b.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240724%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240724T020609Z&X-Amz-Expires=300&X-Amz-Signature=b568099f9dd4bb446d5cfa76905142ccbec20737e8b8c0031fcddc4ec71f2fa8&X-Amz-SignedHeaders=host&actor_id=28639377&key_id=0&repo_id=790743268">
+</div>
+
 ### Reference
 
 - [UniMERNet](https://github.com/opendatalab/UniMERNet)
