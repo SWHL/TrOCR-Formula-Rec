@@ -17,11 +17,12 @@
 |[Pix2tex](https://github.com/lukas-blecher/LaTeX-OCR)|0.873|0.088|0.655|0.408|0.092|0.817|0.012|0.920|
 |[Texify](https://github.com/VikParuchuri/texify)|0.906|0.061|0.690|0.230|0.420|0.390|0.341|0.522|
 |[UniMERNet](https://github.com/opendatalab/UniMERNet)|0.917|0.058|0.916|0.060|0.616|0.229|0.921|0.055|
-|Exp1|||||||||
+|Exp1|0.815|0.121|||0.589|0.227|0.150|0.520|
 
-#### Exp1 2024-07-23
-
-- 首次基于UniMER-1M训练，采用预训练模型是`microsoft/trocr-small-stage1`
+|Exp|备注|
+|:---:|:---|
+|Exp1|- 首次基于UniMER-1M训练，采用预训练模型是`microsoft/trocr-small-stage1` <br/> - 采用TrOCR默认Tokenizer|
+|Exp2|- 更改LaTex-OCR方法用的BPE Tokenizer|
 
 ### ⚠️注意事项
 
