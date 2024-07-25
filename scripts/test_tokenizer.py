@@ -7,6 +7,8 @@ tokenizer_path = "dataset/tokenizer.json"
 tokenizer = PreTrainedTokenizerFast(tokenizer_file=tokenizer_path)
 
 eqs = "( \mathrm { P } < 0 . 0 0 0 1 ,"
-# tok = tokenizer(list(eqs), return_token_type_ids=False)
-tok = tokenizer(list(eqs), padding="max_length", max_length=512, truncation=True)
+tokenizer.add_special_tokens(
+    {"pad_token": "[PAD]", "eos_token": "[EOS]", "bos_token": "[BOS]"}
+)
+tok = tokenizer([eqs], padding="max_length", max_length=512, truncation=True)
 print("ok")

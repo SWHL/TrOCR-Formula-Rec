@@ -14,4 +14,4 @@ trainer = BpeTrainer(
     show_progress=True,
 )
 tokenizer.train(equation_path, trainer)
-tokenizer.save(path=save_path, pretty=False)
+tokenizer.save(path=save_path, pretty=True)
