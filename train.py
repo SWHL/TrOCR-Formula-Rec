@@ -6,7 +6,8 @@ import random
 from pathlib import Path
 from typing import List, Union
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "7"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 import torch
 from PIL import Image
@@ -14,6 +15,7 @@ from torch.utils.data import Dataset
 from tqdm import tqdm
 from transformers import (
     AutoTokenizer,
+    PreTrainedTokenizerFast,
     Seq2SeqTrainer,
     Seq2SeqTrainingArguments,
     TrOCRProcessor,
@@ -39,12 +41,13 @@ class IAMDataset(Dataset):
         file_name, text = self.data[idx]
         image = Image.open(file_name).convert("RGB")
         pixel_values = self.processor(image, return_tensors="pt").pixel_values
+        text = f"[BOS] {text} [EOS]"
         labels = self.tokenizer(
             text,
             padding="max_length",
             max_length=self.max_target_length,
             truncation=True,
-        ).input_ids
+        )["input_ids"]
 
         # important: make sure that PAD tokens are ignored by the loss function
         labels = [
@@ -88,7 +91,15 @@ if __name__ == "__main__":
 
     model_name = "microsoft/trocr-small-stage1"
     processor = TrOCRProcessor.from_pretrained(model_name)
-    tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
+
+    tokenizer_file = "dataset/tokenizer.json"
+    tokenizer = PreTrainedTokenizerFast(tokenizer_file=tokenizer_file)
+    tokenizer.add_special_tokens(
+        {"pad_token": "[PAD]", "bos_token": "[BOS]", "eos_token": "[EOS]"}
+    )
+
+    # tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
+
     train_dataset = IAMDataset(
         data=train_data,
         processor=processor,
@@ -132,13 +143,14 @@ if __name__ == "__main__":
     # model.config.length_penalty = 2.0
     model.config.num_beams = 10
 
+    save_dir = "outputs/Exp2"
     training_args = Seq2SeqTrainingArguments(
         predict_with_generate=True,
         eval_strategy="steps",
         per_device_train_batch_size=32,
         per_device_eval_batch_size=32,
         fp16=True,
-        output_dir="outputs",
+        output_dir=save_dir,
         logging_steps=2,
         save_steps=0.1,
         save_total_limit=1,
@@ -157,4 +169,6 @@ if __name__ == "__main__":
         data_collator=default_data_collator,
     )
     trainer.train()
-    trainer.save_state()
+
+    save_model_dir = Path(save_dir) / "latest"
+    trainer.save_model(str(save_model_dir))
