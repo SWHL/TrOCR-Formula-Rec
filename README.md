@@ -12,17 +12,20 @@
 
 实验表格来自[UniMERNet](https://arxiv.org/abs/2404.15254) Table 5
 
-|Method|SPE-BLEU↑|SPE-EditDis↓|CPE-BLEU↑|CPE-EditDis↓|SCE-BLEU↑|SCE-EditDis↓|HWE-BLEU↑|HWE-EditDis↓|
-|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|[Pix2tex](https://github.com/lukas-blecher/LaTeX-OCR)|0.873|0.088|0.655|0.408|0.092|0.817|0.012|0.920|
-|[Texify](https://github.com/VikParuchuri/texify)|0.906|0.061|0.690|0.230|0.420|0.390|0.341|0.522|
-|[UniMERNet](https://github.com/opendatalab/UniMERNet)|0.917|0.058|0.916|0.060|0.616|0.229|0.921|0.055|
-|Exp1|0.815|0.121|0.677|0.259|0.589|0.227|0.150|0.520|
+| Method   | SPE-BLEU↑ | SPE-EditDis↓ | CPE-BLEU↑ | CPE-EditDis↓ | SCE-BLEU↑ | SCE-EditDis↓ | HWE-BLEU↑ | HWE-EditDis↓ |
+| :---- | :-------: | :----------: | :-------: | :----------: | :-------: | :----------: | :-------: | :----------: |
+| [Pix2tex](https://github.com/lukas-blecher/LaTeX-OCR) |   0.873   |    0.088     |   0.655   |    0.408     |   0.092   |    0.817     |   0.012   |    0.920     |
+| [Texify](https://github.com/VikParuchuri/texify)      |   0.906   |    0.061     |   0.690   |    0.230     |   0.420   |    0.390     |   0.341   |    0.522     |
+| [UniMERNet](https://github.com/opendatalab/UniMERNet) |   0.917   |    0.058     |   0.916   |    0.060     |   0.616   |    0.229     |   0.921   |    0.055     |
+| Exp1   |   0.815   |    0.121     |   0.677   |    0.259     |   0.589   |    0.227     |   0.150   |    0.520     |
+| Exp2    |   0.798   |    0.132     |   0.677   |    0.259     |   0.589   |    0.227     |   0.150   |    0.520     |
+| Exp3 |   0.813   |    0.127     |   0.682   |    0.263     |   0.302   |   0.231     |   0.166   |   0.540      |
 
-|Exp|备注|
-|:---:|:---|
-|Exp1|- 首次基于UniMER-1M训练，采用预训练模型是`microsoft/trocr-small-stage1` <br/> - 采用TrOCR默认Tokenizer|
-|Exp2|- 更改LaTex-OCR方法用的BPE Tokenizer|
+|  Exp  | 备注                                                                                                   |
+| :---: | :----------------------------------------------------------------------------------------------------- |
+| Exp1  | - 首次基于UniMER-1M训练，采用预训练模型是`microsoft/trocr-small-stage1` <br/> - 采用TrOCR默认Tokenizer |
+| Exp2  | - 更改LaTex-OCR方法用的BPE Tokenizer                                                                   |
+| Exp3  | - 修复Exp2中model配置bug                                                                               |
 
 ### ⚠️注意事项
 
