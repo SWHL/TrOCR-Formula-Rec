@@ -18,14 +18,16 @@
 | [Texify](https://github.com/VikParuchuri/texify)      |   0.906   |    0.061     |   0.690   |    0.230     |   0.420   |    0.390     |   0.341   |    0.522     |
 | [UniMERNet](https://github.com/opendatalab/UniMERNet) |   0.917   |    0.058     |   0.916   |    0.060     |   0.616   |    0.229     |   0.921   |    0.055     |
 | Exp1   |   0.815   |    0.121     |   0.677   |    0.259     |   0.589   |    0.227     |   0.150   |    0.520     |
+| Exp1_1 |   0.883   |    0.07     |   0.810   |    0.122     |   0.489   |    0.262     |   0.900   |    0.06     |
 | Exp2    |   0.798   |    0.132     |   0.677   |    0.259     |   0.589   |    0.227     |   0.150   |    0.520     |
 | Exp3 |   0.813   |    0.127     |   0.682   |    0.263     |   0.302   |   0.231     |   0.166   |   0.540      |
 
 |  Exp  | 备注                                                                                                   |
 | :---: | :----------------------------------------------------------------------------------------------------- |
-| Exp1  | - 首次基于UniMER-1M训练，采用预训练模型是`microsoft/trocr-small-stage1` <br/> - 采用TrOCR默认Tokenizer |
-| Exp2  | - 更改LaTex-OCR方法用的BPE Tokenizer                                                                   |
-| Exp3  | - 修复Exp2中model配置bug                                                                               |
+| Exp1  | - 首次基于UniMER-1M训练，采用预训练模型是`microsoft/trocr-small-stage1` <br/> - 采用TrOCR默认Tokenizer <br/> - 仅训练一个Epoch |
+| Exp1_1 | - 基于Exp1，控制单一变量：训练50个Epoch by [limaopeng1](https://github.com/limaopeng1) |
+| Exp2  | - 基于Exp1，控制单一变量：更改LaTex-OCR方法用的BPE Tokenizer <br/> - 仅训练一个Epoch|
+| Exp3  | 修复Exp2中model配置bug <br/> - 仅训练一个Epoch  |
 
 ### ⚠️注意事项
 
