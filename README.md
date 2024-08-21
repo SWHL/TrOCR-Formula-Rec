@@ -25,7 +25,7 @@
 |  Exp  | 备注                                                                                                   |
 | :---: | :------ |
 | Exp1  | - 首次基于UniMER-1M训练，采用预训练模型是`microsoft/trocr-small-stage1` <br/> - 采用TrOCR默认Tokenizer <br/> - 仅训练一个Epoch |
-| Exp1_1 | - 基于Exp1，控制单一变量：训练50个Epoch by [limaopeng1](https://github.com/limaopeng1) |
+| Exp1_1 | - 基于Exp1，控制单一变量：训练30个Epoch by [limaopeng1](https://github.com/limaopeng1) |
 | Exp2  | - 基于Exp1，控制单一变量：更改LaTex-OCR方法用的BPE Tokenizer <br/> - 仅训练一个Epoch|
 | Exp3  | 修复Exp2中model配置bug <br/> - 仅训练一个Epoch  |
 
