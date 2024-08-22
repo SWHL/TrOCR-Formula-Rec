@@ -29,7 +29,7 @@
 | Exp1_1 | - 基于Exp1，控制单一变量：训练30个Epoch by [limaopeng1](https://github.com/limaopeng1) |
 | Exp2  | - 基于Exp1，控制单一变量：更改LaTex-OCR方法用的BPE Tokenizer <br/> - 仅训练一个Epoch|
 | Exp3  | 修复Exp2中model配置bug <br/> - 仅训练一个Epoch  |
-| Exp4  | 与Exp1相比，单一变量：epoch=1 → epoch=5                                                             |
+| Exp4  | 与Exp3相比，单一变量：epoch=1 → epoch=5                                                             |
 
 ### ⚠️注意事项
 
