@@ -22,14 +22,17 @@
 | Exp2    |   0.798   |    0.132     |   0.677   |    0.259     |   0.589   |    0.227     |   0.150   |    0.520     |
 | Exp3 |   0.813   |    0.127     |   0.682   |    0.263     |   0.302   |   0.231     |   0.166   |   0.540      |
 | Exp4 |   0.873   |   0.077    |  0.801   |   0.130     |   0.550  |   0.238    |  0.092   |   0.469     |
+| Exp5 |  0.846  |   0.201  | 0.823  |  0.134     | 0.418  |  0.553   | 0.05  | 0.6724  |
 
 |  Exp  | 备注                                                                                                   |
 | :---: | :------ |
-| Exp1  | - 首次基于UniMER-1M训练，采用预训练模型是`microsoft/trocr-small-stage1` <br/> - 采用TrOCR默认Tokenizer <br/> - 仅训练一个Epoch |
-| Exp1_1 | - 基于Exp1，控制单一变量：训练30个Epoch by [limaopeng1](https://github.com/limaopeng1) |
-| Exp2  | - 基于Exp1，控制单一变量：更改LaTex-OCR方法用的BPE Tokenizer <br/> - 仅训练一个Epoch|
-| Exp3  | 修复Exp2中model配置bug <br/> - 仅训练一个Epoch  |
+| Exp1  | 首次基于UniMER-1M训练，采用预训练模型是`microsoft/trocr-small-stage1` <br/> 采用TrOCR默认Tokenizer <br/> 仅训练一个Epoch |
+| Exp1_1 | 基于Exp1，控制单一变量：训练30个Epoch by [limaopeng1](https://github.com/limaopeng1) |
+| Exp2  | 基于Exp1，控制单一变量：更改LaTex-OCR方法用的BPE Tokenizer <br/> 仅训练一个Epoch|
+| Exp3  | 修复Exp2中model配置bug <br/> 仅训练一个Epoch  |
 | Exp4  | 与Exp3相比，单一变量：epoch=1 → epoch=5                                                             |
+| Exp5  | 与Exp1相比，单一变量：epoch=1 → epoch=10                                                             |
+| Exp6  | 与Exp1相比，单一变量：参考UniMERNet源码，增加数据增强                                      |
 
 ### ⚠️注意事项
 
