@@ -35,6 +35,10 @@
 | Exp5_1  | 补充实验，修复Exp5中，去掉text前后加了BOS和EOS的地方，只跑一个epoch                                            |
 | Exp6  | 与Exp1相比，单一变量：参考UniMERNet源码，增加数据增强                                      |
 
+### checkpoint
+
+🔥 [Hugging Face](https://huggingface.co/SWHL/TrOCR-Formula-Rec)
+
 ### ⚠️注意事项
 
 使用transformers训练前，需要在`import torch`前，指定`CUDA_VISIBLE_DEVICES`，否则会卡住。
