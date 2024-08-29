@@ -1,4 +1,4 @@
-## TrOCR Formula Recognition
+# 🧮 TrOCR Formula Recognition
 
 ❓缘由：看到[UniMERNet](https://github.com/opendatalab/UniMERNet)的工作，从他们发布的模型存储大小（4.91G）来看，实在太重了。同时，他们也发布了一个很大很全的公式识别数据集：UniMER_Dataset。
 
@@ -8,7 +8,7 @@
 
 仓库dataset目录下为UniMER-1M的Tiny版，只用来测试程序使用。
 
-### 🔬实验记录
+### 🔬 实验记录
 
 实验表格来自[UniMERNet](https://arxiv.org/abs/2404.15254) Table 5
 
@@ -35,7 +35,7 @@
 | Exp5_1  | 补充实验，修复Exp5中，去掉text前后加了BOS和EOS的地方，只跑一个epoch                                            |
 | Exp6  | 与Exp1相比，单一变量：参考UniMERNet源码，增加数据增强                                      |
 
-### checkpoint
+### 🦩 Checkpoint
 
 🔥 [Hugging Face](https://huggingface.co/SWHL/TrOCR-Formula-Rec)
 
@@ -43,7 +43,7 @@
 
 使用transformers训练前，需要在`import torch`前，指定`CUDA_VISIBLE_DEVICES`，否则会卡住。
 
-### Dataset
+### 🔢 Dataset
 
 [UniMER_Dataset](https://huggingface.co/datasets/wanderkid/UniMER_Dataset)
 完整的UniMER目录结构如下：
@@ -79,7 +79,7 @@ dataset
     <img src="https://github.com/SWHL/TrOCR-Formula-Rec/releases/download/v0.0.0/dataset_deom.png">
 </div>
 
-### Reference
+### 📚 Reference
 
 - [UniMERNet](https://github.com/opendatalab/UniMERNet)
 - [TrOCR-Handwritten-Mathematical-Expression-Recognition](https://github.com/win5923/TrOCR-Handwritten-Mathematical-Expression-Recognition.git)
