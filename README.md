@@ -8,6 +8,11 @@
 
 仓库dataset目录下为UniMER-1M的Tiny版，只用来测试程序使用。
 
+### ⚠️注意事项
+
+- 使用transformers训练前，需要在`import torch`前，指定`CUDA_VISIBLE_DEVICES`，否则会卡住。
+- 以上实验数据，除Exp1_1外，其他的暂时都没有添加HME100K数据集
+
 ### 🔬 实验记录
 
 实验表格来自[UniMERNet](https://arxiv.org/abs/2404.15254) Table 5
@@ -41,9 +46,6 @@
 
 🔥 [Hugging Face](https://huggingface.co/SWHL/TrOCR-Formula-Rec)
 
-### ⚠️注意事项
-
-使用transformers训练前，需要在`import torch`前，指定`CUDA_VISIBLE_DEVICES`，否则会卡住。
 
 ### 🔢 Dataset
 
