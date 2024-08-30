@@ -11,7 +11,7 @@
 ### ⚠️注意事项
 
 - 使用transformers训练前，需要在`import torch`前，指定`CUDA_VISIBLE_DEVICES`，否则会卡住。
-- 以上实验数据，除Exp1_1外，其他的暂时都没有添加HME100K数据集
+- 以下实验数据，除**Exp1_1**外，其他的暂时都没有添加HME100K数据集
 
 ### 🔬 实验记录
 
