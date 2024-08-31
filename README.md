@@ -86,6 +86,11 @@ dataset
     <img src="https://github.com/SWHL/TrOCR-Formula-Rec/releases/download/v0.0.0/dataset_deom.png">
 </div>
 
+### 🔢 其他数据集和项目
+
+- [fusion-image-to-latex-datasets](https://huggingface.co/datasets/hoang-quoc-trung/fusion-image-to-latex-datasets)
+- [TexTeller](https://github.com/OleehyO/TexTeller)
+
 ### 📚 Reference
 
 - [UniMERNet](https://github.com/opendatalab/UniMERNet)
