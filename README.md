@@ -1,4 +1,4 @@
-# 🧮 TrOCR Formula Recognition
+# √ TrOCR Formula Recognition
 
 ❓缘由：看到[UniMERNet](https://github.com/opendatalab/UniMERNet)的工作，从他们发布的模型存储大小（4.91G）来看，实在太重了。同时，他们也发布了一个很大很全的公式识别数据集：UniMER_Dataset。
 
