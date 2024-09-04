@@ -1,27 +1,28 @@
 # -*- encoding: utf-8 -*-
-# @Author: SWHL
-# @Contact: liekkaskono@163.com
+import argparse
 import os
 import random
 from pathlib import Path
 from typing import List, Union
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "7"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
+import numpy as np
 import torch
 from PIL import Image
 from torch.utils.data import Dataset
 from tqdm import tqdm
 from transformers import (
     AutoTokenizer,
-    PreTrainedTokenizerFast,
     Seq2SeqTrainer,
     Seq2SeqTrainingArguments,
     TrOCRProcessor,
     VisionEncoderDecoderModel,
     default_data_collator,
 )
+
+from trocr_formula.processor import TrainProcessor
 
 
 def read_txt(txt_path: Union[Path, str]) -> List[str]:
@@ -33,6 +34,7 @@ def read_txt(txt_path: Union[Path, str]) -> List[str]:
 class IAMDataset(Dataset):
     def __init__(self, data, processor, tokenizer, max_target_length=1024):
         self.data = data
+        self.train_processor = TrainProcessor()
         self.processor = processor
         self.tokenizer = tokenizer
         self.max_target_length = max_target_length
@@ -40,8 +42,11 @@ class IAMDataset(Dataset):
     def __getitem__(self, idx):
         file_name, text = self.data[idx]
         image = Image.open(file_name).convert("RGB")
+
+        # data augmentation
+        image = self.train_processor(np.array(image))
+
         pixel_values = self.processor(image, return_tensors="pt").pixel_values
-        text = f"[BOS] {text} [EOS]"
         labels = self.tokenizer(
             text,
             padding="max_length",
@@ -49,7 +54,6 @@ class IAMDataset(Dataset):
             truncation=True,
         )["input_ids"]
 
-        # important: make sure that PAD tokens are ignored by the loss function
         labels = [
             label if label != self.tokenizer.pad_token_id else -100 for label in labels
         ]
@@ -76,11 +80,34 @@ def get_dataset(img_dir, txt_path):
     return need_data
 
 
+def get_HME100K_dataset(img_dir: Path, txt_path: str):
+    data_info = read_txt(txt_path)
+    need_data = []
+    for one_data in tqdm(data_info):
+        img_name, label = one_data.split("\t")
+        img_full_path = img_dir / img_name
+        if img_full_path.exists():
+            need_data.append([str(img_full_path), label])
+
+    random.shuffle(need_data)
+    return need_data
+
+
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--exp_name", type=str, default="test")
+    args = parser.parse_args()
+
     train_dir = Path("dataset/UniMER-1M")
     train_img_dir = train_dir / "images"
     train_txt_path = train_dir / "train.txt"
     train_data = get_dataset(train_img_dir, train_txt_path)
+
+    hme100k_img_dir = train_dir / "HME100K" / "train_images"
+    hme100k_label_path = train_dir / "HME100K" / "train_labels.txt"
+    hme_data = get_HME100K_dataset(hme100k_img_dir, hme100k_label_path)
+
+    train_data.extend(hme_data)
 
     test_dir = Path("dataset/UniMER-Test")
     test_img_dir = test_dir / "cpe"
@@ -92,13 +119,7 @@ if __name__ == "__main__":
     model_name = "microsoft/trocr-small-stage1"
     processor = TrOCRProcessor.from_pretrained(model_name)
 
-    tokenizer_file = "dataset/tokenizer.json"
-    tokenizer = PreTrainedTokenizerFast(tokenizer_file=tokenizer_file)
-    tokenizer.add_special_tokens(
-        {"pad_token": "[PAD]", "bos_token": "[BOS]", "eos_token": "[EOS]"}
-    )
-
-    # tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
+    tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
 
     train_dataset = IAMDataset(
         data=train_data,
@@ -139,14 +160,11 @@ if __name__ == "__main__":
     model.config.max_length = max_target_length
     model.config.early_stopping = True
 
-    # model.config.no_repeat_ngram_size = 2
-    # model.config.length_penalty = 2.0
     model.config.num_beams = 10
 
-    save_dir = "outputs/Exp2"
+    save_dir = f"outputs/{args.exp_name}"
     training_args = Seq2SeqTrainingArguments(
         predict_with_generate=True,
-        eval_strategy="steps",
         per_device_train_batch_size=32,
         per_device_eval_batch_size=32,
         fp16=True,
@@ -156,7 +174,7 @@ if __name__ == "__main__":
         save_total_limit=1,
         eval_steps=0.1,
         report_to=["tensorboard"],
-        num_train_epochs=1,
+        num_train_epochs=10,
         dataloader_num_workers=4,
     )
 
@@ -168,7 +186,10 @@ if __name__ == "__main__":
         eval_dataset=eval_dataset,
         data_collator=default_data_collator,
     )
-    trainer.train()
+    if list(Path(save_dir).glob("checkpoint-*")):
+        trainer.train(resume_from_checkpoint=True)
+    else:
+        trainer.train()
 
     save_model_dir = Path(save_dir) / "latest"
     trainer.save_model(str(save_model_dir))

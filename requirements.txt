@@ -5,7 +5,10 @@ sentencepiece
 datasets
 jiwer
 tabulate
-evaluate
 Pillow
 numpy
 tqdm
+protobuf
+evaluate
+tensorboard
+albumentations

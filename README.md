@@ -52,8 +52,9 @@
 - [Exp5_1](https://huggingface.co/SWHL/TrOCR-Formula-Rec/tree/main/Exp5_1)
 - [Exp8](https://huggingface.co/SWHL/TrOCR-Formula-Rec/tree/main/Exp8)
 
-
 ### 🔢 Dataset
+
+⚠️注意：仓库中`dataset`目录下为示例，完整数据集需自行下载补充。
 
 [UniMER_Dataset](https://huggingface.co/datasets/wanderkid/UniMER_Dataset)
 完整的UniMER目录结构如下：
