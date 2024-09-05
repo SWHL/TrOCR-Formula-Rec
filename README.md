@@ -14,6 +14,11 @@
 - 以下实验数据，除**Exp1_1**外，其他的暂时都没有添加HME100K数据集
 - 所有实验均采用`microsoft/trocr-small-stage1`作为预训练模型训练的。
 
+#### TODO
+
+- [ ] 推理采用Flash Attention加速。（transformers==4.44.2中VisionEncoderDecoderModel不支持）
+- [ ] 转ONNX模型，并比较推理速度
+
 ### 🔬 实验记录
 
 实验表格来自[UniMERNet](https://arxiv.org/abs/2404.15254) Table 5
