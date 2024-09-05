@@ -12,6 +12,7 @@
 
 - 使用transformers训练前，需要在`import torch`前，指定`CUDA_VISIBLE_DEVICES`，否则会卡住。
 - 以下实验数据，除**Exp1_1**外，其他的暂时都没有添加HME100K数据集
+- 所有实验均采用`microsoft/trocr-small-stage1`作为预训练模型训练的。
 
 ### 🔬 实验记录
 
