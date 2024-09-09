@@ -101,6 +101,12 @@ dataset
 - [fusion-image-to-latex-datasets](https://huggingface.co/datasets/hoang-quoc-trung/fusion-image-to-latex-datasets)
 - [TexTeller](https://github.com/OleehyO/TexTeller)
 
+### 📞 微信交流群
+
+<div>
+    <img src="https://github.com/SWHL/TrOCR-Formula-Rec/releases/download/v0.0.0/20240909-081329.jpeg" width="25%" >
+</div>
+
 ### 📚 Reference
 
 - [UniMERNet](https://github.com/opendatalab/UniMERNet)
