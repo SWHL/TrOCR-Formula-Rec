@@ -63,6 +63,7 @@
 
 - [Exp5_1](https://huggingface.co/SWHL/TrOCR-Formula-Rec/tree/main/Exp5_1)
 - [Exp8](https://huggingface.co/SWHL/TrOCR-Formula-Rec/tree/main/Exp8)
+- [Exp10](https://huggingface.co/SWHL/TrOCR-Formula-Rec/tree/main/Exp10)
 
 ### 🔢 Dataset
 
