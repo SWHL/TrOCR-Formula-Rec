@@ -1,29 +1,33 @@
+## 20260317 update
+
+我发现了一个更小巧的公式识别模型：[Texo](https://github.com/alephpi/Texo)。因此当前仓库仅作为学习使用了。
+
 # √ TrOCR Formula Recognition
 
-❓缘由：看到[UniMERNet](https://github.com/opendatalab/UniMERNet)的工作，从他们发布的模型存储大小（4.91G）来看，实在太重了。同时，他们也发布了一个很大很全的公式识别数据集：UniMER_Dataset。
+❓缘由：看到 [UniMERNet](https://github.com/opendatalab/UniMERNet) 的工作，从他们发布的模型存储大小（4.91G）来看，实在太重了。同时，他们也发布了一个很大很全的公式识别数据集：UniMER_Dataset。
 
-🎯 于是，想着基于TrOCR + UniMER-1M数据集，训练一个小而美的公式识别数据集。
+🎯 于是，想着基于 TrOCR + UniMER-1M 数据集，训练一个小而美的公式识别数据集。
 
-仓库将UniMERNet作为Baseline，目标是超过UniMERNet，同时模型要小很多。
+仓库将 UniMERNet 作为 Baseline，目标是超过 UniMERNet，同时模型要小很多。
 
-仓库dataset目录下为UniMER-1M的Tiny版，只用来测试程序使用。
+仓库 dataset 目录下为 UniMER-1M 的 Tiny 版，只用来测试程序使用。
 
 ### ⚠️注意事项
 
-- 使用transformers训练前，需要在`import torch`前，指定`CUDA_VISIBLE_DEVICES`，否则会卡住。
-- 以下实验数据，除**Exp1_1**外，其他的暂时都没有添加HME100K数据集
-- 所有实验均采用`microsoft/trocr-small-stage1`作为预训练模型训练的。
+- 使用 transformers 训练前，需要在 `import torch` 前，指定 `CUDA_VISIBLE_DEVICES`，否则会卡住。
+- 以下实验数据，除 **Exp1_1** 外，其他的暂时都没有添加 HME100K 数据集
+- 所有实验均采用 `microsoft/trocr-small-stage1` 作为预训练模型训练的。
 
 #### TODO
 
 - [ ] 给出速度基准
-- [ ] 推理采用Flash Attention加速。（transformers==4.44.2中VisionEncoderDecoderModel不支持）
-- [ ] 转ONNX模型，并比较推理速度
-- [ ] 尝试使用xformers来优化推理速度
+- [ ] 推理采用 Flash Attention 加速。（transformers==4.44.2 中 VisionEncoderDecoderModel 不支持）
+- [ ] 转 ONNX 模型，并比较推理速度
+- [ ] 尝试使用 xformers 来优化推理速度
 
 ### 🔬 实验记录
 
-实验表格来自[UniMERNet](https://arxiv.org/abs/2404.15254) Table 5
+实验表格来自 [UniMERNet](https://arxiv.org/abs/2404.15254) Table 5
 
 | Method   | SPE-BLEU↑ | SPE-EditDis↓ | CPE-BLEU↑ | CPE-EditDis↓ | SCE-BLEU↑ | SCE-EditDis↓ | HWE-BLEU↑ | HWE-EditDis↓ |
 | :---- | :-------: | :----------: | :-------: | :----------: | :-------: | :----------: | :-------: | :----------: |
@@ -46,18 +50,18 @@
 
 |  Exp  | 说明                                                                                                   |
 | :--- | :----------------------------------------------------------------------------------------------------- |
-| Exp1  | 首次基于UniMER-1M训练，采用预训练模型是`microsoft/trocr-small-stage1` <br/> 采用TrOCR默认Tokenizer |
-| Exp1_1 | 基于Exp1，控制单一变量：训练30个Epoch by [limaopeng1](https://github.com/limaopeng1) |
-| Exp2  | 更改LaTex-OCR方法用的BPE Tokenizer                                                                   |
-| Exp3  | 修复Exp2中model配置bug                                                                               |
-| Exp4  | 与Exp3相比，单一变量：epoch=1 → epoch=5                                                             |
-| Exp5  | 与Exp1相比，单一变量：epoch=1 → epoch=10                                                             |
-| Exp5_1  | 补充实验，修复Exp5中，去掉text前后加了BOS和EOS的地方，只跑一个epoch                                            |
-| Exp6  | 与Exp5_1相比，单一变量：参考UniMERNet源码，增加数据增强                                      |
-| Exp7  | 与Exp6相比，单一变量：增加HME100k数据集                                      |
-| Exp8  | 与Exp7相比，单一变量：epoch=1 → epoch=10                                    |
-| Exp9  | 与Exp8相比，单一变量：增加fusion-image-to-latex-datasets数据集（3069505）, Epoch=1       |
-| Exp10  | 与Exp9相比，单一变量：epoch=1 → epoch=10 (fusion-image-to-latex-dataset 3467214)       |
+| Exp1  | 首次基于 UniMER-1M 训练，采用预训练模型是 `microsoft/trocr-small-stage1` <br/> 采用 TrOCR 默认 Tokenizer |
+| Exp1_1 | 基于 Exp1，控制单一变量：训练 30 个 Epoch by [limaopeng1](https://github.com/limaopeng1) |
+| Exp2  | 更改 LaTex-OCR 方法用的 BPE Tokenizer                                                                   |
+| Exp3  | 修复 Exp2 中 model 配置 bug                                                                               |
+| Exp4  | 与 Exp3 相比，单一变量：epoch=1 → epoch=5                                                             |
+| Exp5  | 与 Exp1 相比，单一变量：epoch=1 → epoch=10                                                             |
+| Exp5_1  | 补充实验，修复 Exp5 中，去掉 text 前后加了 BOS 和 EOS 的地方，只跑一个 epoch                                            |
+| Exp6  | 与 Exp5_1 相比，单一变量：参考 UniMERNet 源码，增加数据增强                                      |
+| Exp7  | 与 Exp6 相比，单一变量：增加 HME100k 数据集                                      |
+| Exp8  | 与 Exp7 相比，单一变量：epoch=1 → epoch=10                                    |
+| Exp9  | 与 Exp8 相比，单一变量：增加 fusion-image-to-latex-datasets 数据集（3069505）, Epoch=1       |
+| Exp10  | 与 Exp9 相比，单一变量：epoch=1 → epoch=10 (fusion-image-to-latex-dataset 3467214)       |
 
 ### 🦩 Checkpoint
 
@@ -67,10 +71,10 @@
 
 ### 🔢 Dataset
 
-⚠️注意：仓库中`dataset`目录下为示例，完整数据集需自行下载补充。
+⚠️注意：仓库中 `dataset` 目录下为示例，完整数据集需自行下载补充。
 
 [UniMER_Dataset](https://huggingface.co/datasets/wanderkid/UniMER_Dataset)
-完整的UniMER目录结构如下：
+完整的 UniMER 目录结构如下：
 
 ```text
 dataset
@@ -88,9 +92,9 @@ dataset
     └── spe.txt
 ```
 
-训练集总共1061,791 LaTeX-Image pairs。
+训练集总共 1061,791 LaTeX-Image pairs。
 
-测试集由4种类型公式组成，总共23757张图像：
+测试集由 4 种类型公式组成，总共 23757 张图像：
 
 - Simple Printed Expressions (SPE): 6,762 samples
 - Complex Printed Expressions (CPE): 5,921 samples
